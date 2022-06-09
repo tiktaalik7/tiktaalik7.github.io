@@ -1,9 +1,7 @@
 ---
 layout: default
 ---
-
-Text can be **bold**, _italic_, or ~~strikethrough~~.
-{: .text-center }
+#<center> Text can be **bold**, _italic_, or ~~strikethrough~~. </center>
 
 [Link to another page](./another-page.html).
 [Link to test page](./test-page.html).
