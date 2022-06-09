@@ -3,8 +3,8 @@ layout: default
 ---
 
 
-[Github](./https://github.com/tiktaalik7).
-[LinkedIn](./https://www.linkedin.com/in/%EB%AF%BC%EC%84%9C-%EC%B2%9C-5a797523a/).
+[Github](https://github.com/tiktaalik7)
+[LinkedIn](https://www.linkedin.com/in/%EB%AF%BC%EC%84%9C-%EC%B2%9C-5a797523a/)
 
 There should be whitespace between paragraphs.
 
