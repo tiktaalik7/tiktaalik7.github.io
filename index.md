@@ -1,10 +1,10 @@
 ---
 layout: default
 ---
-# <center> Text can be **bold**, _italic_, or ~~strikethrough~~. </center>
 
-[Link to another page](./another-page.html).
-[Link to test page](./test-page.html).
+
+[Github](./https://github.com/tiktaalik7).
+[LinkedIn](./https://www.linkedin.com/in/%EB%AF%BC%EC%84%9C-%EC%B2%9C-5a797523a/).
 
 There should be whitespace between paragraphs.
 
