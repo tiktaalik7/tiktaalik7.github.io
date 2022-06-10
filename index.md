@@ -10,10 +10,11 @@ layout: default
 > [LinkedIn](https://www.linkedin.com/in/%EB%AF%BC%EC%84%9C-%EC%B2%9C-5a797523a/) & [Github](https://github.com/tiktaalik7)  
 > _tiktaalik7@gmail.com_
 * * *
-> ### projects (in progress)
+> ### Projects (in progress)
 >> test 1  
 >> test 2
 
 * * *
 
 ## posts
+[`RxJava`를 이용한 리액티브 프로그래밍](./post-001-RxJava.html).  
