@@ -1,6 +1,6 @@
 ---
 layout: default
-title: `RxJava`를 이용한 리액티브 프로그래밍
+title: RxJava를 이용한 리액티브 프로그래밍
 description: Reactive programming using RxJava
 ---
 
