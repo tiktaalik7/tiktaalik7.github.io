@@ -10,12 +10,4 @@ description: Reactive programming using RxJava
 
 contents will be added soon
 
-<div style="text-align: center">
-[home](./)<>
-</div>
-
-<center>
-[home](./)<>
-</center>
-
-[home](./)<>
+[back](./#center)
