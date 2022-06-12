@@ -10,4 +10,4 @@ description: Reactive programming using RxJava
 
 contents will be added soon
 
-[back](./#center)
+[back](./)
