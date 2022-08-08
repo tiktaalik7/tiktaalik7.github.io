@@ -13,8 +13,8 @@ layout: default
 > _tiktaalik7@gmail.com_
 * * *
 > ### Projects (in progress)
->> [이종 환경에서의 로봇 컴포넌트와 AI 컴포넌트 간 연동 기술 개발](./projects-001-cloudrobot)  
->> [로그인 서비스 개발](./projects-002-loginservice)
+>> error1
+>> error2
 
 * * *
 
