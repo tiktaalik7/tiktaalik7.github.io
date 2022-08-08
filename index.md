@@ -19,4 +19,4 @@ layout: default
 * * *
 
 ## posts
-> _[1. `RxJava`를 이용한 리액티브 프로그래밍](./posts-001-RxJava.html)_
+> [1. `RxJava`를 이용한 리액티브 프로그래밍](./posts-001-RxJava.html)
