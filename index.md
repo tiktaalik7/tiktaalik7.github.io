@@ -13,7 +13,7 @@ layout: default
 > _tiktaalik7@gmail.com_
 * * *
 > ### Projects (in progress)
->> [Login_Service](./project-001-Login_Service.html)
+>> [Java, Docker, Redis를 이용한 로그인 서비스 API 개발](./project-001-Login_Service.html)
 
 * * *
 
