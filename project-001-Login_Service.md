@@ -10,24 +10,18 @@ _개발환경 : Windows, VisualStudioCode, Java, Docker, Redis, Git, Maven_
 _사용 라이브러리 : Jedis_
 
 # 프로젝트 시나리오
-<table><tr><td>
-<img src = "./imgs/project-001-img1.jpg" />
-</td></tr></table>
-
-
-![시나리오1](./imgs/project-001-img1.jpg)  
-  
-![시나리오2](./imgs/project-001-img2.jpg)
+> ![시나리오1](./imgs/project-001-img1.jpg)  
 
 # Docker를 이용한 Redis 세팅
-+ Power Shell, CMD, Terminal 등에 해당 쉘커맨드 입력
+### Power Shell, CMD, Terminal 등에 해당 쉘커맨드 입력
+
 ```
 docker run -it -d -p 6379:6379 -v C:/Users/ten/docker_volume:/data redis /data/redis.conf
 ```
 
 ***
 
-**Docker run 커맨드 옵션**
++ Docker run 커맨드 옵션  
 
 `-it` : bash를 이용해 컨테이너와의 표준 입력을 활성화  
 `-d` : 사용중인 쉘에서 CLI 명령어 사용(Redis)을 위해 백그라운드 환경으로 컨테이너 실행  
@@ -36,17 +30,17 @@ docker run -it -d -p 6379:6379 -v C:/Users/ten/docker_volume:/data redis /data/r
 
 ***
 
-**Docker 이미지**  
++ Docker 이미지  
 [Redis Image 상세정보 참조](https://hub.docker.com/_/redis)
 
 ***
 
-**기타 명령어**  
++ 기타 명령어  
 컨테이너를 생성하며 동시에 해당 컨테이너의 디렉토리에 레디스 구성 파일을 불러오도록하는 명령어(`/data/redis.conf`) 실행
 
 ***
 
-**Redis 구성 파일은 컨테이너 생성과 동시에 지정해야 함**  
+#### Redis 구성 파일은 컨테이너 생성과 동시에 지정해야 함  
 컨테이너의 쉘커맨드로 Redis 구성 파일(*[redis.conf](https://redis.io/docs/manual/config/)*)을 지정할 경우 구성파일 을 인식하지 못함
 
 ***
