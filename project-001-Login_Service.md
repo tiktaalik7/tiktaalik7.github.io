@@ -10,43 +10,46 @@ _개발환경 : Windows, VisualStudioCode, Java, Docker, Redis, Git, Maven_
 _사용 라이브러리 : Jedis_
 
 # 프로젝트 시나리오
-> ![시나리오1](./imgs/project-001-img1.jpg)  
+![시나리오1](./imgs/project-001-img1.jpg)  
 
 # Docker를 이용한 Redis 세팅
 ### Power Shell, CMD, Terminal 등에 해당 쉘커맨드 입력
 
 ```
-docker run -it -d -p 6379:6379 -v C:/Users/ten/docker_volume:/data redis /data/redis.conf
+docker run -it -d -p 6379:6379 -v C:/Users/ten/docker_volume:/data redis:latest /data/redis.conf
 ```
 
 ***
 
 + Docker run 커맨드 옵션  
-
 `-it` : bash를 이용해 컨테이너와의 표준 입력을 활성화  
 `-d` : 사용중인 쉘에서 CLI 명령어 사용(Redis)을 위해 백그라운드 환경으로 컨테이너 실행  
-`-p` : 컨테이너 포트를 지정해 연결, 해당 프로젝트에서는 local로 진행  
+`-p` : 컨테이너와 호스트의 연결 포트를 지정, 해당 프로젝트에서는 local로 진행  
 `-v` : 호스트와 컨테이너가 공유하는 디렉토리 지정  
 
 ***
 
 + Docker 이미지  
-[Redis Image 상세정보 참조](https://hub.docker.com/_/redis)
+[redis:latest](https://hub.docker.com/_/redis)
 
 ***
 
 + 기타 명령어  
-컨테이너를 생성하며 동시에 해당 컨테이너의 디렉토리에 레디스 구성 파일을 불러오도록하는 명령어(`/data/redis.conf`) 실행
+컨테이너를 생성하며 동시에 해당 컨테이너의 디렉토리에 레디스 구성 파일을 불러오도록하는 명령 구문
+```
+/data/redis.conf
+```
+
 
 ***
 
 #### Redis 구성 파일은 컨테이너 생성과 동시에 지정해야 함  
-컨테이너의 쉘커맨드로 Redis 구성 파일(*[redis.conf](https://redis.io/docs/manual/config/)*)을 지정할 경우 구성파일 을 인식하지 못함
+별도로 컨테이너의 쉘커맨드로 Redis 구성 파일(*[redis.conf](https://redis.io/docs/manual/config/)*)을 지정할 경우 구성파일을 인식하지 못함
 
 ***
 
-**Redis 권한 인증(Requirepass) 수정**  
-Redis 쉘커맨드 권한 획득을 위해 비밀번호 수정
+### Redis 권한 인증(Requirepass) 수정  
+
 ```conf
 # IMPORTANT NOTE: starting with Redis 6 "requirepass" is just a > compatibility
 # layer on top of the new ACL system. The option effect will be just setting
@@ -63,33 +66,39 @@ Redis 쉘커맨드 권한 획득을 위해 비밀번호 수정
 
 ***
 
+### Redis 연결 확인
+
+`ContainerID`는 `docker ps -a`로 확인
 ```
 C:\Users\ten>docker exec -it ContainerID /bin/sh
 ```
-컨테이너 아이디는 `docker ps -a`로 확인 가능
 
 ***
 
-컨테이너 내부에서 커맨드 입력
+컨테이너 내부의 `Redis`에 접속  
+
++ 한글이 깨질 경우 `--raw` 옵션 추가
 ```
 # redis-cli
 ```
-+ 한글이 깨질 경우 `--raw` 옵션 추가
 
 ***
 
-ping 커맨드로 연결 상태를 확인
+ping 명령으로 클라이언트 서버가 작동하는지 서버 연결이 유효한지 검사
 ```
 127.0.0.1:6379> ping
 ```
-`(error) NOAUTH Authentication required.` 에러 메시지 출력시
+
+***
+
+`(error) NOAUTH Authentication required.` 에러 메시지 출력시 수정한 requirepass 로 권한 획득
 ```
 127.0.0.1:6379> AUTH {requirepass}
 ```
 
 ***
 
-연결 완료
+확인
 ```
 127.0.0.1:6379> ping
 PONG
