@@ -43,7 +43,7 @@ docker run -it -d -p 6379:6379 -v C:/Users/ten/docker_volume:/data redis:latest 
 
 ***
 
-#### Redis 구성 파일은 컨테이너 생성과 동시에 지정해야 함  
+✔ Redis 구성 파일은 컨테이너 생성과 동시에 지정해야 함  
 별도로 컨테이너의 쉘커맨드로 Redis 구성 파일(*[redis.conf](https://redis.io/docs/manual/config/)*)을 지정할 경우 구성파일을 인식하지 못함
 
 ***
@@ -77,7 +77,8 @@ C:\Users\ten>docker exec -it ContainerID /bin/sh
 
 컨테이너 내부의 `Redis`에 접속  
 
-+ 한글이 깨질 경우 `--raw` 옵션 추가
++ 한글이 깨질 경우 `--raw` 옵션 추가  
+
 ```
 # redis-cli
 ```
@@ -91,14 +92,14 @@ ping 명령으로 클라이언트 서버가 작동하는지 서버 연결이 유
 
 ***
 
-`(error) NOAUTH Authentication required.` 에러 메시지 출력시 수정한 requirepass 로 권한 획득
+에러 메시지 (`(error) NOAUTH Authentication required.`) 출력 시 수정한 requirepass로 권한 획득
 ```
 127.0.0.1:6379> AUTH {requirepass}
 ```
 
 ***
 
-확인
+확인 완료
 ```
 127.0.0.1:6379> ping
 PONG
