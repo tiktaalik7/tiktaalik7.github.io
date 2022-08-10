@@ -6,9 +6,11 @@ description: login service using java, docker, redis
 
 * * *
 
-_개발환경 : Windows, VisualStudioCode, Java, Docker, Redis, Git, Maven_
+_개발환경 : Windows, VisualStudioCode, Java, Docker, Redis, Git, Maven_  
 _사용 라이브러리 : Jedis_
 
+# 프로젝트 시나리오
+![시나리오1](./imgs/project-001-img1.jpg)  
 
 # Docker를 이용한 Redis 세팅
 + Power Shell, CMD, Terminal 등에 해당 쉘커맨드 입력
