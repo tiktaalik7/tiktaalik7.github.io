@@ -10,6 +10,11 @@ _개발환경 : Windows, VisualStudioCode, Java, Docker, Redis, Git, Maven_
 _사용 라이브러리 : Jedis_
 
 # 프로젝트 시나리오
+<table><tr><td>
+<img src = "./imgs/project-001-img1.jpg" />
+</td></tr></table>
+
+
 ![시나리오1](./imgs/project-001-img1.jpg)  
   
 ![시나리오2](./imgs/project-001-img2.jpg)
