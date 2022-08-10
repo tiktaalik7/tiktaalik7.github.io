@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Java, Docker, Redis를 이용한 로그인 서비스 API 개발
+title: 로그인 서비스 API 개발
 description: login service using java, docker, redis
 ---
 
@@ -13,7 +13,7 @@ _사용 라이브러리 : Jedis_
 ![시나리오1](./imgs/project-001-img1.jpg)  
 
 # Docker를 이용한 Redis 세팅
-### Power Shell, CMD, Terminal 등에 해당 쉘커맨드 입력
+### 1. Power Shell, CMD, Terminal 등에 해당 쉘커맨드 입력
 
 ```
 docker run -it -d -p 6379:6379 -v C:/Users/ten/docker_volume:/data redis:latest /data/redis.conf
@@ -40,15 +40,12 @@ docker run -it -d -p 6379:6379 -v C:/Users/ten/docker_volume:/data redis:latest 
 /data/redis.conf
 ```
 
-
-***
-
 ✔ Redis 구성 파일은 컨테이너 생성과 동시에 지정해야 함  
 별도로 컨테이너의 쉘커맨드로 Redis 구성 파일(*[redis.conf](https://redis.io/docs/manual/config/)*)을 지정할 경우 구성파일을 인식하지 못함
 
 ***
 
-### Redis 권한 인증(Requirepass) 수정  
+### 2. Redis 권한 인증(Requirepass) 수정  
 
 ```conf
 # IMPORTANT NOTE: starting with Redis 6 "requirepass" is just a > compatibility
@@ -66,9 +63,10 @@ docker run -it -d -p 6379:6379 -v C:/Users/ten/docker_volume:/data redis:latest 
 
 ***
 
-### Redis 연결 확인
+### 3. Redis 연결 확인
+앞서 생성한 컨테이너에 명령을 내리기 위해 접속
++ `ContainerID`는 `docker ps -a`로 확인  
 
-`ContainerID`는 `docker ps -a`로 확인
 ```
 C:\Users\ten>docker exec -it ContainerID /bin/sh
 ```
@@ -85,7 +83,7 @@ C:\Users\ten>docker exec -it ContainerID /bin/sh
 
 ***
 
-ping 명령으로 클라이언트 서버가 작동하는지 서버 연결이 유효한지 검사
+ping 명령으로 클라이언트 서버가 작동하는지, 서버 연결이 유효한지 검사
 ```
 127.0.0.1:6379> ping
 ```
@@ -103,9 +101,9 @@ ping 명령으로 클라이언트 서버가 작동하는지 서버 연결이 유
 ```
 127.0.0.1:6379> ping
 PONG
-```
+```  
 
-*CLI로 저장된 데이터들을 확인하거나 관리하는 방법과 [P3X](https://www.electronjs.org/apps/p3x-redis-ui)같은 Redis GUI Desktop App을 사용하는 방법도 있음*
+✔ *CLI로 저장된 데이터들을 확인하거나 관리하는 방법과 [P3X](https://www.electronjs.org/apps/p3x-redis-ui)같은 Redis GUI Desktop App을 사용하는 방법도 있음*
 
 ***
 
