@@ -10,7 +10,8 @@ _개발환경 : Windows, VisualStudioCode, Java, Docker, Redis, Git, Maven_
 _사용 라이브러리 : Jedis_
 
 # 프로젝트 시나리오
-![시나리오1](./imgs/project-001-img1.jpg)
+![시나리오1](./imgs/project-001-img1.jpg)  
+  
 ![시나리오2](./imgs/project-001-img2.jpg)
 
 # Docker를 이용한 Redis 세팅
@@ -47,7 +48,7 @@ docker run -it -d -p 6379:6379 -v C:/Users/ten/docker_volume:/data redis /data/r
 
 **Redis 권한 인증(Requirepass) 수정**  
 Redis 쉘커맨드 권한 획득을 위해 비밀번호 수정
-```
+```conf
 # IMPORTANT NOTE: starting with Redis 6 "requirepass" is just a > compatibility
 # layer on top of the new ACL system. The option effect will be just setting
 # the password for the default user. Clients will still authenticate using
@@ -100,6 +101,20 @@ PONG
 ***
 
 # [Jedis](https://github.com/redis/jedis), [Redis](https://redis.io/) feature
+
+jedis : redis용 java 클라이언트
+
+pom.xml의 dependency에 추가
+
+```xml
+<dependency>
+    <groupId>redis.clients</groupId>
+    <artifactId>jedis</artifactId>
+    <version>4.2.0</version>
+</dependency>
+```
+
+
 
 1. 제디스 풀에대한 설명
 2. 사용하는 레디스 명령어에 대한 설명
