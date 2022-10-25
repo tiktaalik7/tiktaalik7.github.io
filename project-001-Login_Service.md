@@ -109,9 +109,7 @@ PONG
 
 # [Jedis](https://github.com/redis/jedis), [Redis](https://redis.io/) feature
 
-jedis : redis용 java 클라이언트
-
-pom.xml의 dependency에 추가
+Jedis는 redis용 java 클라이언트로 사용하기 전 `pom.xml`에 dependency 추가
 
 ```xml
 <dependency>
@@ -121,14 +119,15 @@ pom.xml의 dependency에 추가
 </dependency>
 ```
 
+Jedis connection pool에서 필요할 때마다 리소스를 할당받아 사용  
 
-
-1. 제디스 풀에대한 설명
-2. 사용하는 레디스 명령어에 대한 설명
-
+```java 
+private static final JedisPool pool = new JedisPool(jedisPoolConfig, ip, port, timeOut, requirepass);
+jedis = pool.getResource();
+```
 
 **Redis `Set` 자료형의 특성**  
-Entity 수에 관계없이 시간복잡도 O(1)를 갖는 자료형  
+Entity 수에 관계없이 시간복잡도 `O(1)`를 갖는 자료형  
 관리해야할 회원의 수가 많아져도 효율적인 데이터 관리가 가능
 
 | Group | Command   | TimeComplexity |
@@ -137,10 +136,10 @@ Entity 수에 관계없이 시간복잡도 O(1)를 갖는 자료형
 | set   | srem      | O(1)           |
 | set   | sismember | O(1)           |
 
-별도의 [체인 해시 테이블](https://en.wikipedia.org/wiki/Hash_table)을 사용해 구현  
-정확히는 시간복잡도O(1+n/k)를 가짐 n : 항목 수, k : 버킷 수  
-버킷 수를 항목 수에 따라 증가(재해싱)시켜 n/k를 낮게 유지  
-결과적으로 시간복잡도는 O(1)에 근사
+이는 별도의 [체인 해시 테이블](https://en.wikipedia.org/wiki/Hash_table)을 사용해 구현  
+정확히는 시간복잡도 `O(1+n/k)`를 가짐 n : 항목 수, k : 버킷 수  
+버킷 수를 항목 수에 따라 증가(재해싱)시켜 `n/k`를 낮게 유지  
+결과적으로 시간복잡도는 `O(1)`에 근사함
 
 > *하나의 버킷에 체인 해시 형태로 여러 엔티티가 지정될 경우*  
 > `Time Complexity > 1` (조건 : 버킷 수 < 항목 수)
@@ -148,16 +147,34 @@ Entity 수에 관계없이 시간복잡도 O(1)를 갖는 자료형
 > *하나의 버킷에 하나의 엔티티가 지정될 경우*  
 > `Time Complexity = 1` (조건 : 버킷 수 >= 항목 수)
 
-# jedis를 사용하기 위한 threadlocal에 대한 설명 추가 (소켓 익셉션 언급)
-1. 클래스 다이어그램 설명
-2. 각 기능별 코드 설명 및 사용법
-3. 코드를 길게 나열하지 않아도 됨 여기서 깃헙 레포 링크 걸기
+# Threadlocal을 이용한 Jedis 사용
+Threadlocal은 스레드 별 각각의 변수를 사용할 수 있게 함  
 
-pool -> 하나만 써서 전부 통신하기 때문에 문제된 것
+하나의 Jedis 자원을 사용해 멀티스레드 환경에서 통신할 때 `socket exception error`가 발생  
+이를 해결하고 손쉽게 통신 트래픽을 분산시키기 위해 Threadlocal을 사용  
 
-스레드로컬 사용해서 스레드마다 다른 제디스를 사용하게 끔 함
+***
 
-기존 -> 풀에서 하나를 겟리소스로 빼와서 멀티스레드에서 사용해서 문제됨 (제디스 동기화 지원 안함)
+*스레드 마다 `getJedis()`로 `pool`에서 Jedis 자원을 할당받아 사용*  
 
+``` java
+private static final JedisPool pool = new JedisPool(jedisPoolConfig, ip, port, timeOut, requirepass);
+private static final ThreadLocal<Jedis> jedis = new ThreadLocal<>();
+
+public Jedis getJedis() {
+    var result = jedis.get();
+    if (result == null) {
+        result = pool.getResource();
+        jedis.set(result);
+    }
+    return result;
+}
+```
+
+# 클래스 다이어그램
+![클래스다이어그램](./imgs/project-001-img2.jpg)  
+
+
+# 주요 메소드
 
 [Home](./)
