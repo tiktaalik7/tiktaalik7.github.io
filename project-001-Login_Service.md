@@ -26,6 +26,7 @@ docker run -it -d -p 6379:6379 -v C:/Users/ten/docker_volume:/data redis:latest 
 `-d` : 사용중인 쉘에서 CLI 명령어 사용(Redis)을 위해 백그라운드 환경으로 컨테이너 실행  
 `-p` : 컨테이너와 호스트의 연결 포트를 지정, 해당 프로젝트에서는 local로 진행  
 `-v` : 호스트와 컨테이너가 공유하는 디렉토리 지정  
+> ✔ *해당 디렉토리에 회원정보를 저장함(e.g. rdb, aof)*
 
 ***
 
@@ -131,7 +132,7 @@ Entity 수에 관계없이 시간복잡도 `O(1)`를 갖는 자료형
 관리해야할 회원의 수가 많아져도 효율적인 데이터 관리가 가능
 
 | Group | Command   | TimeComplexity |
-|-------|-----------|----------------|
+|:-----:|:---------:|:--------------:|
 | set   | sadd      | O(1)           |
 | set   | srem      | O(1)           |
 | set   | sismember | O(1)           |
@@ -150,7 +151,7 @@ Entity 수에 관계없이 시간복잡도 `O(1)`를 갖는 자료형
 # Threadlocal을 이용한 Jedis 사용
 Threadlocal은 스레드 별 각각의 변수를 사용할 수 있게 함  
 
-하나의 Jedis 자원을 사용해 멀티스레드 환경에서 통신할 때 `socket exception error`가 발생  
+하나의 Jedis 자원을 사용해 멀티스레드 환경에서 통신할 때 `Socket Exception`이 발생  
 이를 해결하고 손쉽게 통신 트래픽을 분산시키기 위해 Threadlocal을 사용  
 
 ***
@@ -176,5 +177,48 @@ public Jedis getJedis() {
 
 
 # 주요 메소드
++ 몇 가지 주요 메소드를 소개하고 나머지 모든 구현은 [레포지토리](https://github.com/tiktaalik7/login_service) 참조  
 
-[Home](./)
+***
+
+### 로그인 메소드  
+```java
+    public boolean login(String id, String pw) throws NoSuchAlgorithmException {
+        var database = mDatabase.getJedis();
+        var value = MessageDigest.getInstance("SHA-256");
+        var builder = new StringBuilder();
+
+        if (check_IDPW(id, pw)) {
+            if (database.sismember("key_Members", id)) {
+                value.update(pw.getBytes());
+                for (var piece : value.digest()) {
+                    builder.append(String.format("%02x", piece));
+                }
+                if (database.hget(id + "_info", "key_PW").equals(builder.toString())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+```
+
+### 회원가입 메소드   
+```java
+    public boolean register(String id, String pw, String phone, String[] ans) throws NoSuchAlgorithmException {
+        var database = mDatabase.getJedis();
+
+        if (check_IDPW(id, pw) && !database.sismember("key_Members", id)) {
+            if ((check_Phone(phone) == UNIQUE_NUMBER) && check_Ans(ans) == SUCCESS) {
+                Member member = new Member();
+                member.set(id, pw, phone, ans);
+                return true;
+            }
+        }
+
+        return false;
+    }
+``` 
+
+[*Home*](./)
