@@ -181,6 +181,9 @@ public Jedis getJedis() {
 ***
 
 **로그인 메소드**  
+> `check_IDPW`로 형식을 확인, `id`가 존재하는지 확인.  
+> `id`를 비교, `pw`는 `SHA-256`알고리즘을 통해 값을 변환해 비교.  
+> 결과에 따라 `true`, `false`를 반환.  
 
 ```java
     public boolean login(String id, String pw) throws NoSuchAlgorithmException {
@@ -205,6 +208,10 @@ public Jedis getJedis() {
 ```
 
 **회원가입 메소드**  
+> `check_IDPW`로 형식을 확인, 중복된 `id`가 있는지 확인.  
+> `check_Phone`으로 전화번호 중복을 검사, `check_Ans`로 형식을 검사.  
+> 모든 검사를 통과했을 경우 `true`를 반환하고 해당 멤버를 회원에 추가함.
+
 
 ```java
     public boolean register(String id, String pw, String phone, String[] ans) throws NoSuchAlgorithmException {
