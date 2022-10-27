@@ -175,13 +175,13 @@ public Jedis getJedis() {
 # 클래스 다이어그램
 ![클래스다이어그램](./imgs/project-001-img2.jpg)  
 
-
 # 주요 메소드
 + 몇 가지 주요 메소드를 소개하고 나머지 모든 구현은 [레포지토리](https://github.com/tiktaalik7/login_service) 참조  
 
 ***
 
-### 로그인 메소드  
+**로그인 메소드**  
+
 ```java
     public boolean login(String id, String pw) throws NoSuchAlgorithmException {
         var database = mDatabase.getJedis();
@@ -204,7 +204,8 @@ public Jedis getJedis() {
     }
 ```
 
-### 회원가입 메소드   
+**회원가입 메소드**  
+
 ```java
     public boolean register(String id, String pw, String phone, String[] ans) throws NoSuchAlgorithmException {
         var database = mDatabase.getJedis();
