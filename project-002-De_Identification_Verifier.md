@@ -54,6 +54,76 @@ _사용 라이브러리 : OpenCV_
 veil의 동작 구조
 
 ## 데이터 저장 및 유지
++ 데이터의 저장은 파일명, 질문1, 질문2, 질문3, veils CSV 형식으로 저장한다.
+
++ 모델의 구조는 다음과 같다.
+
+
++ veil의 매커니즘은 다음과 같다.
+  + 저장은 ratio로 디스플레이할 때만 value로 변환해 사용
+  + 이미지의 크기가 변할 때 veil도 맞춰주기 위해 비율을 사용
+  + 다양한 모니터 환경에서도 동일한 veil을 표현하기위해 비율을 사용
+
+### 픽셀값에서 비율로 변환하는 과정
++ 전체 이미지에서 veil의 위치를 비율로 나타냄
++ veil의 위치(x, y)[비율] = veil의 위치(x, y)[픽셀] / 이미지의 크기(width, height)[픽셀]
+
+```java
+private Veil value2Ratio(Veil veil, Rectangle imgBounds, Rectangle backBounds) {
+        // 파라미터 veil은 value값을 갖는 veil;
+        double posX;
+        double posY;
+        double ratioX;
+        double ratioY;
+        double ratioWidth;
+        double ratioHeight;
+
+        posX = veil.x - ((backBounds.width - imgBounds.width) / 2);
+        posY = veil.y - ((backBounds.height - imgBounds.height) / 2);
+
+        ratioX = posX / imgBounds.width;
+        ratioY = posY / imgBounds.height;
+
+        ratioWidth = veil.width / imgBounds.width;
+        ratioHeight = veil.height / imgBounds.height;
+
+        Veil resultVeil = new Veil(veil.shape, ratioX, ratioY, ratioWidth, ratioHeight, veil.angle);
+
+        return resultVeil;
+    }
+```
+
+### 비율에서 픽셀값으로 변환하는 과정
++ 비율로 표현된 veil의 위치를 사진 상의 픽셀로 나타냄
++ veil의 위치(x, y)[픽셀] = veil의 위치(x, y)[비율] X 이미지의 크기(width, height)[픽셀]
+
+```java
+public ArrayList<Veil> ratio2Value(ArrayList<Veil> veils, Rectangle imgBounds, Rectangle backBounds) {
+    ArrayList<Veil> resultVeils = new ArrayList<>();
+    Veil veil;
+    double posX;
+    double posY;
+    double valueX;
+    double valueY;
+    double valueWidth;
+    double valueHeight;
+    for (var piece : veils) {
+        posX = piece.x * imgBounds.width;
+        posY = piece.y * imgBounds.height;
+        valueX = posX + ((backBounds.width - imgBounds.width) / 2);
+        valueY = posY + ((backBounds.height - imgBounds.height) / 2);
+        valueWidth = piece.width * imgBounds.width;
+        valueHeight = piece.height * imgBounds.height;
+        veil = new Veil(piece.shape, valueX, valueY, valueWidth, valueHeight, piece.angle);
+        resultVeils.add(veil);
+    }
+    return resultVeils;
+}
+```
+
+
+
+
 원본파일의 유지와 veil 삭제를 위해 비식별화 검증 도구에서는 항상 원본을 사용한다.
 
 사용자의 입력이 사진에 곧바로 저장되는 것이 아닌 엑셀 파일에 해당 내용을 저장한 뒤
@@ -71,10 +141,18 @@ veil의 저장 규칙은 다음과 같다.
 타겟 파일의 용량에 따라 비식별화 검증 도구가 로드하는데에 시간이 오래 걸린다.
 
 5k 이미지 기준 그 표 삽입
-
+![PreLoad](./imgs/project-002-img11.jpg)
 따라서 
 
 그 피피티 자료 첨부
+
+|   | Before[ms] | After[ms] |
+|:-:|:----------:|:---------:|
+| 1 | 188        | 17        |
+| 2 | 175        | 14        |
+| 3 | 185        | 15        |
+| 4 | 186        | 12        |
+| 5 | 177        | 14        |
 
 해당 내용은 PreLoad 클래스에서 확인할 수 있다.
 
