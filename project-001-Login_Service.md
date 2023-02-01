@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 로그인 서비스 API 개발
-description: login service using java, docker, redis
+description: 로그인 서비스를 구현하는데에 사용할 API 개발
 ---
 
 * * *

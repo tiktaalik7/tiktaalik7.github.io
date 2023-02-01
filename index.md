@@ -13,9 +13,10 @@ layout: default
 > _tiktaalik7@gmail.com_
 * * *
 > ### Projects (in progress)
->> [로그인 서비스 API 개발](./project-001-Login_Service.html)
+>> 
 
 * * *
 
 ## Posts
-> no posts
+> [로그인 서비스 API 개발](./project-001-Login_Service.html)
+> [비식별화 검증 도구 개발](./project-002-De_Identification_Verifier.html)
