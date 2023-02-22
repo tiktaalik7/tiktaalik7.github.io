@@ -19,7 +19,7 @@ layout: default
 >### Projects
 >> [로그인 서비스 API 개발](./project-001-Login_Service.html)  
 >> [비식별화 검증 도구 개발](./project-002-De_Identification_Verifier.html)  
->> [싱글톤과 밸리데이션 체크]()  
+>> [Validation Check with Singleton Pattern]()  
 * * *
 
 >## Papers
