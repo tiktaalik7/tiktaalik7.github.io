@@ -229,4 +229,25 @@ public Jedis getJedis() {
     }
 ``` 
 
+# 사용
+> 로그인 사용 예
+```java 
+LoginSystem control = new LoginSystem();
+try {
+    control.login("input id", "input pw");
+} catch (NoSuchAlgorithmException e) {
+    e.printStackTrace();
+}
+```
+> 회원가입 사용 예
+```java
+LoginSystem control = new LoginSystem();
+try {
+    control.register("input id", "input pw", "input phone", new String[] {"answer1, answer2"});
+} catch (NoSuchAlgorithmException e) {
+    e.printStackTrace();
+}
+```
+
+
 [*Home*](./)

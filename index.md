@@ -14,6 +14,7 @@ layout: default
 * * *
 > ### Projects (in progress)
 >> [정보모델 레지스트리 구축](./project-003-registry.html)  
+* * *
 > ### Projects
 >> [로그인 서비스 API 개발](./project-001-Login_Service.html)  
 >> [비식별화 검증 도구 개발](./project-002-De_Identification_Verifier.html)  
@@ -23,4 +24,4 @@ layout: default
 
 >## Posts
 > [Q Learning](./project-006-q_learning.html)
->
+> [Optimizer](./project-007-optimizer.html)
