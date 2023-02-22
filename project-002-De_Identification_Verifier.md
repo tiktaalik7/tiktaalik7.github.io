@@ -7,7 +7,7 @@ description: 비식별화된 이미지의 검증 작업을 위한 도구 개발
 * * *
 
 _개발환경 : Windows, VisualStudioCode, Java, SWT, Git, Maven_  
-_사용 라이브러리 : OpenCV_
+_사용 라이브러리 : SWT, OpenCV_
 
 # 프로젝트 개요
 
