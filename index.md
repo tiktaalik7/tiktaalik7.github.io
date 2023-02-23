@@ -27,5 +27,5 @@ layout: default
 > [객체 분할 기반 매니퓰레이터의 집기-놓기 동작](./project-005-manipulator’s_pick-and-place_based_on_instance_segmentation.html)  
 
 >## Posts
-> [Q Learning](./project-006-q_learning.html)
-> [Optimizer](./project-007-optimizer.html)
+> [Q Learning](./project-006-q_learning.html)  
+> [Optimizer](./project-007-optimizer.html)  
