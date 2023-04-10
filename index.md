@@ -16,13 +16,13 @@ layout: default
 
 >## Projects 
 >> ## In Progress
->> [클라우드 로봇 개발 도구](./project-003-registry.html)  
+>> [클라우드 로봇 개발 도구](./project-003.html)  
 >> ## Done
->> [로그인 서비스 API 개발](./project-001-Login_Service.html)  
->> [비식별화 검증 도구 개발](./project-002-De_Identification_Verifier.html)  
+>> [로그인 서비스 API 개발](./project-001.html)  
+>> [비식별화 검증 도구 개발](./project-002.html)  
 
 * * *
 
 >## Papers
-> [개인 주식 거래 전략 실증을 위한 시뮬레이터 개발](./project-004-development_of_stock_simulator_for_assessing_the_personal_trading_strategy.html)  
-> [객체 분할 기반 매니퓰레이터의 집기-놓기 동작](./project-005-manipulator’s_pick-and-place_based_on_instance_segmentation.html)  
+> [개인 주식 거래 전략 실증을 위한 시뮬레이터 개발](./project-004.html)  
+> [객체 분할 기반 매니퓰레이터의 집기-놓기 동작](./project-005.html)  
