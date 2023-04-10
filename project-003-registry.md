@@ -52,8 +52,8 @@ Json 형식을 띄며 직렬화된 반환값을 Java Object로 받을 수 있도
 ![Gson](./imgs/project-003-img4.png)  
 
 + Dcoker Registry에 접근하기 위해 Base64 인코딩된 인증 정보 필요  
-  + 디코딩이 가능하기 때문에 보안성이 높은 방식은 아님
-  + 시스템과 독립적으로 전송 또는 저장을 보장하기 위해 사용
+  + 디코딩이 가능하기 때문에 보안성이 높은 방식은 아님  
+  + 시스템과 독립적으로 전송 또는 저장을 보장하기 위해 사용  
 
 ```java
 var auth = "Basic " + Base64.encodeBytes((user + ":" + password).getBytes());
@@ -85,28 +85,38 @@ var cert = new X509TrustManager() {
 
 ### 2.1.2 Image 목록을 저작 도구에 리스트업  
 + `Robot Module` 메뉴에 이미지 목록이 리스트업 및 동작 확인  
-![리스트업](./imgs/project-003-img5.gif)
+![리스트업](./imgs/project-003-img5.gif)  
 
 ## 2.2 Registry 구축  
 + **Docker Registry를 사용하지 않고 직접 구축**  
-![소개](./imgs/project-003-img7.png)
+![소개](./imgs/project-003-img7.png)  
 
-### 2.2.1 IM Database 구축  
-| 가이드 UI | 수정 전 UI|
-|:-----:|:---------:|
-|||
-+ 데이터 필드
-+ 이름에서 아이디로 키 변경한 내용
+### 2.2.1 Web Server 구축  
++ Lazy Loading을 구현하기 위해 `getCatalog` 메소드를 구현
+  + `getCatalog` : `start` 번째 항목부터 `step` 개의 항목을 가져오기
+  + 20개씩 가져오도록 설정
 
-### 2.2.2 HW IM Database 구축  
-+ 데이터 필드
+```java
+public interface Interface {
+        @GET("/DockerAgent/catalog")
+        Call<List<HW>> getCatalog(@Query("start") int start, @Query("step") int step);
 
-### 2.2.3 Web Server 구축  
-+ 레트로핏 인터페이스 정의
-+ Lazy loading이 불가능했던 이유
-+ Lazy loading 구현
+        @GET("/DockerAgent/list")
+        Call<List<HW>> getList();
 
-## 2.3 UI 수정
+        @GET("/DockerAgent/get")
+        Call<HW> get(@Query("ip") String ip);
+
+        @POST("/DockerAgent/add")
+        Call<ResultCode> add(@Body HW hw);
+
+        @HTTP(method = "DELETE", path = "/DockerAgent/delete", hasBody = true)
+        Call<ResultCode> delete(@Body HW hw);
+    }
+```
+
+## 2.3 UI 수정  
+
 | 수정 후 UI | 수정 전 UI|
 |:-----:|:---------:|
 |![이미지](./imgs/project-003-img3.jpg)|![이미지](./imgs/project-003-img8.png)|
@@ -123,11 +133,10 @@ var cert = new X509TrustManager() {
     + 두 개 이상의 메뉴가 열려있을 때 새로운 메뉴를 열 때 가장 먼저 선택된 메뉴가 닫히도록 구현
   + 메뉴 마다 상하 크기를 조절할 수 있도록 함
   + 사이드바 좌우 크기를 조절할 수 있도록 함
-+ 사진  
-![이미지](./imgs/project-003-img10.png)  
-+ 영상  
-![이미지](./imgs/project-003-img11.gif)  
-
+  
+| 설명 | 사용 영상|
+|:-----:|:---------:|
+|![이미지](./imgs/project-003-img10.png)|![이미지](./imgs/project-003-img11.gif)|
 
 ### 2.3.2 HW 심볼 UI 수정
 ![이미지](./imgs/project-003-img12.png)  
